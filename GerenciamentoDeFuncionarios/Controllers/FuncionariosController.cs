@@ -21,7 +21,7 @@ namespace GerenciamentoDeFuncionarios.Controllers
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcionario.ToListAsync());
+            return View(await _context.Funcionario.Include("Lotacao").ToListAsync());
         }
 
         // GET: Funcionarios/Details/5
@@ -45,6 +45,8 @@ namespace GerenciamentoDeFuncionarios.Controllers
         // GET: Funcionarios/Create
         public IActionResult Create()
         {
+            ViewData["LotacaoID"] =
+            new SelectList(_context.Departamento, "Id", "Nome");
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace GerenciamentoDeFuncionarios.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Nascimento")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Nascimento,LotacaoID")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {

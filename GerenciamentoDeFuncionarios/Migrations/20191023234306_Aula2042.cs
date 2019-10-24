@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GerenciamentoDeFuncionarios.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Aula2042 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace GerenciamentoDeFuncionarios.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LotacaoId = table.Column<int>(nullable: true),
+                    LotacaoID = table.Column<int>(nullable: true),
                     Nascimento = table.Column<DateTime>(nullable: false),
                     Nome = table.Column<string>(nullable: true)
                 },
@@ -80,9 +80,9 @@ namespace GerenciamentoDeFuncionarios.Migrations
                 column: "ResponsavelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Funcionario_LotacaoId",
+                name: "IX_Funcionario_LotacaoID",
                 table: "Funcionario",
-                column: "LotacaoId");
+                column: "LotacaoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarefas_AreaId",
@@ -95,9 +95,9 @@ namespace GerenciamentoDeFuncionarios.Migrations
                 column: "ExecutorId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Funcionario_Departamento_LotacaoId",
+                name: "FK_Funcionario_Departamento_LotacaoID",
                 table: "Funcionario",
-                column: "LotacaoId",
+                column: "LotacaoID",
                 principalTable: "Departamento",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);

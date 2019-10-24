@@ -11,8 +11,8 @@ using System;
 namespace GerenciamentoDeFuncionarios.Migrations
 {
     [DbContext(typeof(FuncionariosContext))]
-    [Migration("20191021232018_Inicial")]
-    partial class Inicial
+    [Migration("20191023234306_Aula2042")]
+    partial class Aula2042
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,7 +43,7 @@ namespace GerenciamentoDeFuncionarios.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("LotacaoId");
+                    b.Property<int?>("LotacaoID");
 
                     b.Property<DateTime>("Nascimento");
 
@@ -51,7 +51,7 @@ namespace GerenciamentoDeFuncionarios.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LotacaoId");
+                    b.HasIndex("LotacaoID");
 
                     b.ToTable("Funcionario");
                 });
@@ -94,7 +94,8 @@ namespace GerenciamentoDeFuncionarios.Migrations
                 {
                     b.HasOne("GerenciamentoDeFuncionarios.Models.Departamento", "Lotacao")
                         .WithMany("Funcionarios")
-                        .HasForeignKey("LotacaoId");
+                        .HasForeignKey("LotacaoID")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("GerenciamentoDeFuncionarios.Models.Tarefa", b =>

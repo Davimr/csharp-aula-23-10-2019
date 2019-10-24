@@ -42,7 +42,7 @@ namespace GerenciamentoDeFuncionarios.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("LotacaoId");
+                    b.Property<int?>("LotacaoID");
 
                     b.Property<DateTime>("Nascimento");
 
@@ -50,7 +50,7 @@ namespace GerenciamentoDeFuncionarios.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LotacaoId");
+                    b.HasIndex("LotacaoID");
 
                     b.ToTable("Funcionario");
                 });
@@ -93,7 +93,8 @@ namespace GerenciamentoDeFuncionarios.Migrations
                 {
                     b.HasOne("GerenciamentoDeFuncionarios.Models.Departamento", "Lotacao")
                         .WithMany("Funcionarios")
-                        .HasForeignKey("LotacaoId");
+                        .HasForeignKey("LotacaoID")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("GerenciamentoDeFuncionarios.Models.Tarefa", b =>
