@@ -27,6 +27,17 @@ namespace GerenciamentoDeFuncionarios.Controllers
         // GET: Tarefas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            foreach (var funcionario in _context.Funcionario.ToList())
+            {
+                selectListItems.Add(new SelectListItem()
+                {
+                    Text = funcionario.Nome,
+                    Value = funcionario.Id.ToString()
+                });
+            }
+            ViewBag.Executores = selectListItems;
+
             if (id == null)
             {
                 return NotFound();
@@ -82,6 +93,17 @@ namespace GerenciamentoDeFuncionarios.Controllers
                 return NotFound();
             }
 
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            foreach (var funcionario in _context.Funcionario.ToList())
+            {
+                selectListItems.Add(new SelectListItem()
+                {
+                    Text = funcionario.Nome,
+                    Value = funcionario.Id.ToString()
+                });
+            }
+            ViewBag.Executores = selectListItems;
+
             var tarefa = await _context.Tarefas.SingleOrDefaultAsync(m => m.Id == id);
             if (tarefa == null)
             {
@@ -95,7 +117,7 @@ namespace GerenciamentoDeFuncionarios.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Inicio,Fim,Titulo,Descricao")] Tarefa tarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Inicio,Fim,Titulo,Descricao,ExecutorId")] Tarefa tarefa)
         {
             if (id != tarefa.Id)
             {
